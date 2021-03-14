@@ -43,7 +43,7 @@ const Layout: React.FC<{ home?: boolean }> = ({ children, home }) => {
         {children}
       </main>
       {!home && (
-        <div className="bg-white text-gray-800">
+        <div className="bg-white text-gray-800 w-1/3 p-10 ml-10 mb-5 rounded-full text-center">
           <Link href="/">
             <a>← Back to home</a>
           </Link>
