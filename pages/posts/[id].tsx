@@ -1,15 +1,18 @@
-import Layout from "../../components/layout";
 import { getAllPostIds, getPostData, PostData } from "../../lib/posts";
 import Head from "next/head";
 import Date from "../../components/date";
-import utilStyles from "../../styles/utils.module.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import hydrate from "next-mdx-remote/hydrate";
+import renderToString from "next-mdx-remote/render-to-string";
+import { MdxRemote } from "next-mdx-remote/types";
 
 const Post: React.FC<{
   postData: PostData;
-}> = ({ postData }) => {
+  mdxSource: MdxRemote.Source;
+}> = ({ postData, mdxSource }) => {
+  const mdxContent = hydrate(mdxSource);
   return (
-    <Layout>
+    <>
       <Head>
         <title>{postData.title}</title>
       </Head>
@@ -18,10 +21,9 @@ const Post: React.FC<{
           <h1 className="text-3xl font-extrabold">{postData.title}</h1>
           <Date dateString={postData.date} />
         </div>
-
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        {mdxContent}
       </article>
-    </Layout>
+    </>
   );
 };
 
@@ -35,9 +37,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const postData = await getPostData(params.id);
+  const mdxSource = await renderToString(postData.mdx);
   return {
     props: {
       postData,
+      mdxSource,
     },
   };
 }
