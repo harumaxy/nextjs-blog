@@ -6,7 +6,7 @@ import Date from "../components/date";
 
 export default function Home({ allPostsData }) {
   return (
-    <Layout home={true}>
+    <>
       <Head>
         <title>{siteTitle}</title>
       </Head>
@@ -17,7 +17,7 @@ export default function Home({ allPostsData }) {
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
       </section>
-    </Layout>
+    </>
   );
 }
 

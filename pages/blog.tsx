@@ -3,9 +3,7 @@ import { BlogList } from "../components/blogList";
 import { getSortedPostsData, PostData } from "../lib/posts";
 
 const Blog: React.FC<{ allPostsData: PostData[] }> = ({ allPostsData }) => (
-  <Layout>
-    <BlogList allPostsData={allPostsData}></BlogList>
-  </Layout>
+  <BlogList allPostsData={allPostsData}></BlogList>
 );
 
 export default Blog;
