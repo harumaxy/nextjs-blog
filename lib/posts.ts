@@ -6,10 +6,15 @@ import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
-type FrontMatter = {
+export type FrontMatter = {
   title: string;
   date: string;
 };
+
+export type PostData = {
+  id: string;
+  contentHtml: string;
+} & FrontMatter;
 
 export function getSortedPostsData() {
   // Get file names under /posts
