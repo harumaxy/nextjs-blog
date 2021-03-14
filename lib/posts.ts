@@ -11,15 +11,19 @@ export type FrontMatter = {
   date: string;
 };
 
+export type ListItemParam = {
+  id: string;
+} & FrontMatter;
+
 export type PostData = {
   id: string;
   contentHtml: string;
 } & FrontMatter;
 
-export function getSortedPostsData() {
+export function getSortedPostsData(): ListItemParam[] {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
+  const allPostsData: ListItemParam[] = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.mdx?$/, "");
 
@@ -57,7 +61,7 @@ export function getAllPostIds() {
   });
 }
 
-export async function getPostData(id: string) {
+export async function getPostData(id: string): Promise<PostData> {
   const fullPath = path.join(postsDirectory, `${id}.mdx`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
