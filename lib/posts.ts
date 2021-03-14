@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import {} from "@mdx-js/loader";
+import renderToString from "next-mdx-remote/render-to-string";
+import { MdxRemote } from "next-mdx-remote/types";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
@@ -16,7 +17,7 @@ export type ListItemParam = {
 
 export type PostData = {
   id: string;
-  mdx: string;
+  mdxSource: MdxRemote.Source;
 } & FrontMatter;
 
 export function getSortedPostsData(): ListItemParam[] {
@@ -65,12 +66,13 @@ export async function getPostData(id: string): Promise<PostData> {
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
+  const { content, data } = matter(fileContents);
+  const mdxSource = await renderToString(content, { scope: data });
 
   // Combine the data with the id and contentHtml
   return {
     id,
-    mdx: matterResult.content,
-    ...(matterResult.data as FrontMatter),
+    mdxSource,
+    ...(data as FrontMatter),
   };
 }
