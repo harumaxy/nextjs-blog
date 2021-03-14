@@ -19,7 +19,7 @@ const Post: React.FC<{
         <h1 className="text-3xl font-extrabold">{postData.title}</h1>
         <Date dateString={postData.date} />
       </div>
-      <article className="prose mx-auto">{mdxContent}</article>
+      <article className="mx-auto">{mdxContent}</article>
     </>
   );
 };

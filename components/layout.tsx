@@ -11,7 +11,7 @@ export const myIconSrc = "/images/PowerSkull.png";
 
 const Layout: React.FC<{ home?: boolean }> = ({ children, home }) => {
   return (
-    <div className="flex flex-col min-h-screen min-w-full bg-green-400 mx-auto container">
+    <div className="flex flex-col min-h-screen min-w-full bg-green-400 mx-auto container ">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="harumaxy 技術ブログ" />
@@ -39,7 +39,10 @@ const Layout: React.FC<{ home?: boolean }> = ({ children, home }) => {
           ]}
         />
       </header>
-      <main className="bg-white rounded-lg p-10 m-10 flex-grow">
+      <main
+        className="bg-white rounded-lg p-10 m-10 flex-grow max-w-screen-2xl prose"
+        style={{ minHeight: "0.5vw" }}
+      >
         {children}
       </main>
       {!home && (
