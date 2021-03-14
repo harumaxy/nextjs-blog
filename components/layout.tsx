@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
-import { NavLink } from "./navLink";
+import { Navigation } from "./navigation";
 
 export const name = "Max";
 export const siteTitle = "Maxのブログ";
@@ -32,10 +32,10 @@ const Layout: React.FC<{ home?: boolean }> = ({ children, home }) => {
           </h1>
         </div>
 
-        <NavLink
+        <Navigation
           items={[
             { title: "Home", route: "/" },
-            { title: "Blog", route: "/posts" },
+            { title: "Blog", route: "/blog" },
           ]}
         />
       </header>

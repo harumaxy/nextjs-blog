@@ -5,7 +5,7 @@ export type NavItem = {
   route: string;
 };
 
-export const NavLink: React.FC<{ items: Array<NavItem> }> = (props) => (
+export const Navigation: React.FC<{ items: Array<NavItem> }> = (props) => (
   <nav>
     <ul className="flex space-x-4">
       {props.items.map((item) => (
