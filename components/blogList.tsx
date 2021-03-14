@@ -1,19 +1,18 @@
 import Link from "next/link";
 import Date from "./date";
-import utilStyles from "../styles/utils.module.css";
 import { PostData } from "../lib/posts";
 
 export const BlogList: React.FC<{ allPostsData: PostData[] }> = (props) => (
-  <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-    <h2 className={utilStyles.headingLg}>Blog</h2>
-    <ul className={utilStyles.list}>
+  <section>
+    <h2>Blog</h2>
+    <ul>
       {props.allPostsData.map(({ id, date, title }) => (
-        <li className={utilStyles.listItem} key={id}>
+        <li key={id}>
           <Link href={`/posts/${id}`}>
             <a>{title}</a>
           </Link>
           <br />
-          <small className={utilStyles.lightText}>
+          <small>
             <Date dateString={date} />
           </small>
         </li>
